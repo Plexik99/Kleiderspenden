@@ -1,3 +1,44 @@
+body{ 
+    /*padding: innereabstand
+    margin: äußereabstand */
+
+    padding: 0px;
+    margin: 0px;
+    background: none;
+
+   
+}
 header {
-    color: rgb(15, 15, 172);
+
+}
+
+/*Klasse darf mehrmals vorkommen .blabla  id darf nur einmal vorkommen #blabla */
+.mitte{
+    /*flex steht für flexibel (div sind standart im block)*/
+    display: flex;
+    /*horizontale ändern*/
+    justify-content: center;
+    /*nachoben kp wie das heißt ^^ */
+    align-items: center;
+
+}
+
+#teaser {
+    width: 100%;
+    height: 300px;
+}
+
+/*nur das bild in der id wird angesprochen*/
+#teaser img {
+    width: 100%;
+    height: 100%;
+    /*links rechts kann es sich anpassen */
+    object-fit: cover;
+}
+/*zustand reagieren bildschirm, wenn der screen mindestens br. 800px hat, dann soll breite */
+@media screen and (min-width: 800px){
+    /*dann soll raute teaser statt 300px 600px machen */
+    #teaser {
+        height: 600px;
+    }
 }
