@@ -1,15 +1,12 @@
 body{ 
     /*padding: innereabstand
-    margin: äußereabstand */
-
+    margin: äußereabstand schriftart ändern*/
+    font-family: "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0px;
     margin: 0px;
     background: none;
 
    
-}
-header {
-
 }
 
 /*Klasse darf mehrmals vorkommen .blabla  id darf nur einmal vorkommen #blabla */
@@ -20,6 +17,10 @@ header {
     justify-content: center;
     /*nachoben kp wie das heißt ^^ */
     align-items: center;
+
+}
+.text {
+    display: flex;
 
 }
 
@@ -42,3 +43,28 @@ header {
         height: 600px;
     }
 }
+
+/*navigation sticky, brauche ich nur wenn man skrollen muss*/
+nav {
+    position: sticky;
+    top: 0px;
+    backdrop-filter: blur(8px);
+
+
+}
+/*Punkte von <li> löschen und die standart gesetzte margin und padding auf null setzen*/
+/*mit dem kommer sagen wir das beides gilt*/
+ header nav li ul, nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+footer div, header nav li ul,nav ul li a {
+    font-weight: 600;
+    padding: 16px;
+    align-items:center;
+}
+
