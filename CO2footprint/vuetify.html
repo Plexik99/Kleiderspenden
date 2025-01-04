@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CO₂-Emissionsdaten</title>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.js"></script>
+  <style>
+    .category-row {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 100px; /* Breite des Logos anpassen */
+      height: auto; /* Höhe automatisch anpassen */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px; /* Abstand nach oben */
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      <v-container>
+        <!-- Logo das wieder zurück zur start seite leitet -->
+        <a href="index.html">
+          <img src="co2-6317012_1920.jpg" alt="logo" class="logo">
+        </a>
+
+        <h1>CO₂-Emissionsdaten</h1>
+
+        <!-- Tabelle mit Überbegriffe -->
+        <v-data-table
+          :headers="headers"
+          :items="emissionsData"
+          :search="search"
+          :items-per-page="5"
+          class="elevation-2"
+          density="compact"
+        >
+          <!-- Toolbar für die Suchfunktion -->
+          <template v-slot:top>
+            <v-toolbar flat>
+              <v-toolbar-title>Suchen/Filtern</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-text-field
+                v-model="search"
+                label="Suche..."
+                prepend-inner-icon="mdi-magnify"
+                single-line
+                hide-details
+                @input="sanitizeInput"
+              ></v-text-field>
+            </v-toolbar>
+          </template>
+
+          <!-- Benutzerdefinierte Zeile für Überbegriffe -->
+          <template v-slot:body="{ items }">
+            <!-- Überbegriffe -->
+            <tr class="category-row">
+              <td>Unternehmen</td>
+              <td>Land</td>
+              <td>CO₂ Emissionen (Tonnen)</td>
+            </tr>
+            <!-- Datenzeilen -->
+            <tr v-for="item in items" :key="item.company">
+              <td>{{ item.company }}</td>
+              <td>{{ item.country }}</td>
+              <td>{{ item.emissions }}</td>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-container>
+    </v-app>
+  </div>
+
+  <script>
+    // Vue App erstellen
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data() {
+        return {
+          // Tabellen-Header
+          headers: [
+            { text: "Unternehmen", value: "company" },
+            { text: "Land", value: "country" },
+            { text: "CO₂ Emissionen (Tonnen)", value: "emissions" }
+          ],
+          // Fiktive CO₂-Emissionsdaten
+          emissionsData: [
+            { company: "Firma A", country: "China", emissions: 15000 },
+            { company: "Firma B", country: "USA", emissions: 12000},
+            { company: "Firma C", country: "China", emissions: 15000},
+            { company: "Firma D", country: "Indien", emissions: 11000},
+            { company: "Firma E", country: "Brasilien", emissions: 7000},
+            { company: "Firma F", country: "Brasilien", emissions: 6000},
+            { company: "Firma G", country: "Frankreich", emissions: 5383},
+            { company: "Firma H", country: "Deutschland", emissions: 5030},
+            { company: "Firma I", country: "Deutschland", emissions: 5000},
+            { company: "Firma J", country: "Deutschland", emissions: 4953},
+            { company: "Firma K", country: "Italien", emissions: 4803},
+            { company: "Firma L", country: "Russland", emissions: 4734},
+            { company: "Firma M", country: "Spanien", emissions: 4634},
+            { company: "Firma N", country: "Indien", emissions: 4300},
+            { company: "Firma O", country: "USA", emissions: 3400},
+          ],
+          // Suchwert für Filterfunktion
+          search: "",
+        };
+      },
+      methods: {
+        sanitizeInput(event) {
+          // Entferne potenziell schädliche Zeichen
+          this.search = event.replace(/[<>]/g, '');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
